@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-{{-- @if ($errors->any())
-    <div>
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
-    </div>
-@endif --}}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+<x-layouts.base>
 
 <body>
-    <x-header />
+
 
     <main class="mx-auto w-[75%] ">
         <div class=" flex flex-collumn justify-center h-screen items-center">
@@ -47,7 +32,7 @@
     </main>
 
 
-    <x-footer />
+
 </body>
 
-</html>
+</x-layouts.base>
