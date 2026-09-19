@@ -55,7 +55,8 @@ class WebsiteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $websites = Website::findorfail($id);
+        return view('websites')->with('websites', $websites);
     }
 
     /**
@@ -63,7 +64,7 @@ class WebsiteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('projects.edit');
     }
 
     /**
@@ -71,7 +72,28 @@ class WebsiteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = $request->validate([
+            'title' => 'required|string|max:20',
+            'description' => 'required|string|max:400',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2000'
+        ]);
+
+        $newProject = new Website;
+
+        $newProject->title = $validate['title'];
+        $newProject->description = $validate['description'];
+
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+
+            $request->image->storeAs('images', $imageName, 'public');
+
+            $newProject->image = $imageName;
+        }
+
+        $newProject->save();
+        return redirect()->route('websites');
+
     }
 
     /**
@@ -79,6 +101,7 @@ class WebsiteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Website::destroy($id);
+        return redirect()->route('home');
     }
 }
