@@ -1,33 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+<x-layouts.base>
 <body>
-<x-header />
+
 
  <main class="mx-auto w-[75%] ">
         <div class=" flex flex-collumn justify-center h-screen items-center">
 
-            <form class="bg-blue-300 ">
+            <form class="bg-blue-300 " action="{{ route('projects.store') }}" method="POST">
+                @csrf
                 <div class="">
                     <div class="flex items-top  gap-2 mt-2 mb-4">
-                        <label for="fname">First name:</label>
-                        <input type="text" id="fname" name="fname">
+                        <label for="user">user:</label>
+                        <input type="text" name="user">
                     </div>
                     <div class="flex items-top gap-2 mt-4">
-                        <label for="lname">Last name:</label>
-                        <input type="text" id="lname" name="lname">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email">
                     </div>
                     <div class="flex items-top  gap-6 mt-4">
-                        <label for="opinions">opinion:</label>
-                        <textarea id="" name="opinion" rows="4" cols="23">opinion</textarea>
+                        <label for="password">password:</label>
+                        <input type="password"  name="password">
                     </div>
 
+                    <div><input type="submit" value="submit"></div>
                           <p>dont have an account?</p>
                     <a href="{{ route('register') }}">register</a>
             </form>
@@ -36,6 +30,6 @@
     </main>
 
 
-<x-footer />
+
 </body>
-</html>
+</x-layouts.base>
