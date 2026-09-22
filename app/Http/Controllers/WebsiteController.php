@@ -10,10 +10,15 @@ class WebsiteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $request)
     {
+        $filter = $request->filter;
+         if ($filter) {
+        $websites = Website::where('filter', $filter)->get();
+         }else{
         $websites = Website::all();
-        return view('websites')->with('websites', $websites);
+         }
+        return view('websites', compact('websites'));
     }
 
     /**
@@ -29,12 +34,11 @@ class WebsiteController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $validate = $request->validate([
             'title' => 'required|string|max:20',
             'description' => 'required|string|max:400',
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2000'
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2000',
+            'filter' => 'required|string',
         ]);
 
         $imageName = time() . '.' . $request->image->extension();
@@ -44,6 +48,7 @@ class WebsiteController extends Controller
         $newProject = new Website;
         $newProject->title = $validate['title'];
         $newProject->description = $validate['description'];
+        $newProject->filter = $validate['filter'];
         $newProject->image = $imageName;
         $newProject->save();
 
@@ -55,8 +60,8 @@ class WebsiteController extends Controller
      */
     public function show(string $id)
     {
-        $websites = Website::findorfail($id);
-        return view('websites')->with('websites', $websites);
+        $website = Website::findorfail($id);
+        return view('projects.show')->with('website', $website);
     }
 
     /**
@@ -64,7 +69,8 @@ class WebsiteController extends Controller
      */
     public function edit(string $id)
     {
-        return view('projects.edit');
+        $website = Website::findorfail($id);
+        return view('projects.edit')->with('website', $website);
     }
 
     /**
@@ -75,23 +81,21 @@ class WebsiteController extends Controller
         $validate = $request->validate([
             'title' => 'required|string|max:20',
             'description' => 'required|string|max:400',
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2000'
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2000',
+            'filter' => 'required|string',
         ]);
 
-        $newProject = new Website;
-
-        $newProject->title = $validate['title'];
-        $newProject->description = $validate['description'];
-
+        $Project = Website::findorfail($id);
+        $Project->update($validate);
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
 
             $request->image->storeAs('images', $imageName, 'public');
 
-            $newProject->image = $imageName;
+            $Project->image = $imageName;
         }
 
-        $newProject->save();
+        $Project->save();
         return redirect()->route('websites');
 
     }
@@ -102,6 +106,6 @@ class WebsiteController extends Controller
     public function destroy(string $id)
     {
         Website::destroy($id);
-        return redirect()->route('home');
+        return redirect()->route('websites');
     }
 }

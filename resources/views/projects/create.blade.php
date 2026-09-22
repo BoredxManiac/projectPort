@@ -17,10 +17,21 @@
                         <label for="image">images</label>
                         <input type="file" name="image">
                     </div>
+
+                     <div class="flex items-top  gap-2 mt-2 mb-4">
+                                     <label for="filter">filters:</label>
+                                     <select name="filter" id="filter">
+                                        <option value="web">Web</option>
+                                         <option value="native">Native</option>
+                                     </select>
+
+
+                            </div>
                     <div class="flex items-top  gap-6 mt-4">
                         <label for="description">description:</label>
                         <textarea name="description" rows="4" cols="23">description</textarea>
                     </div>
+
 
                     <div class="flex items-top  gap-6 mt-4">
                         <input type="submit" value="submit">

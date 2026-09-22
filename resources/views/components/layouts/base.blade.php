@@ -9,9 +9,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="bg-[#A6E1FA] text-black">
 
-    <header class="bg-blue-600">
+    <header class="bg-[#0E6BA8] rounded-b-xl p-5">
         <div class="flex justify-between p-4">
             <h1>mijn portofolio</h1>
             <nav>
@@ -24,13 +24,13 @@
 
     {{ $slot }}
 
-    <footer class="bg-blue-600 mt-auto">
-        <div class="flex justify-between p-10">
-            <h1>mijn portofolio</h1>
-            <nav>
-                <a href="{{ route('home') }}">home</a>
-                <a href="{{ route('websites') }}">websites</a>
-            </nav>
+    <footer class="mt-2 bg-[#0E6BA8] mt-auto">
+        <div class="flex justify-between p-4 mt-8 items-end">
+             <ul class="mt-">
+                <li class="mb-2">My portfolio</li>
+                 <li class="mb-2">A website made to showcase projects made</li>
+                 <li>website was designed and coded by Khadija Aweys M&copy;</li>
+             </ul>
         </div>
     </footer>
 

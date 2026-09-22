@@ -4,16 +4,14 @@
 
     <main class="mx-auto w-[95%]">
         <h1 class="text-center  mt-10 ">Welcome to my website</h1>
-        <div class="flex flex-row-reverse h-screen mt-2 ">
-            <div class="ml-10 w-3/4">
-                <p class="w-5/6 items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit et nobis dicta adipisci rem, dolor
-                    amet placeat numquam non culpa nemo est ullam quaerat repudiandae voluptatibus! Nobis rem optio
-                    officiis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores distinctio, laudantium
-                    deserunt minus harum dolorem iste modi sequi quos in totam, quas architecto et hic fugiat cum
-                    blanditiis, suscipit esse.</p>
+        <div class="flex flex-row h-screen mt-2 items-center ">
+             <div>
+                <img class="rounded-2xl" src="https://placehold.co/800x800" alt="placeholder image">
             </div>
-            <div>
-                <img class="" src="https://placehold.co/800x800" alt="placeholder image">
+
+            <div class="ml-10 w-3/4 h-1/2 flex flex-col">
+                  <a class=" flex justify-center mt-10" href="{{ route('websites') }}"><button>see mij websites!</button></a>
+                <p class="mt-auto">Welcome to mij portfolio website!</p>
             </div>
         </div>
     </main>
