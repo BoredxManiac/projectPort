@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('websites', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('filter_options_id')->nullable()->constrained('filter_options')->nullOnDelete();
             $table->string('title');
             $table->text('description');
             $table->string('image')->nullable();
+            $table->string('filter');
             $table->timestamps();
         });
     }
