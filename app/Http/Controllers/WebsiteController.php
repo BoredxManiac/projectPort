@@ -10,14 +10,14 @@ class WebsiteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index( Request $request)
+    public function index(Request $request)
     {
         $filter = $request->filter;
-         if ($filter) {
-        $websites = Website::where('filter', $filter)->get();
-         }else{
-        $websites = Website::all();
-         }
+        if ($filter) {
+            $websites = Website::where('filter', $filter)->get();
+        } else {
+            $websites = Website::all();
+        }
         return view('websites', compact('websites'));
     }
 
@@ -103,8 +103,13 @@ class WebsiteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( Request $request, Website $website, string $id)
     {
+         $website = Website::findOrFail($id);
+         $websiteError = $request->confirmation === $website->title;
+        if (!$websiteError) {
+            return back()->with('error', 'Project name does not match.');
+        }
         Website::destroy($id);
         return redirect()->route('websites');
     }
